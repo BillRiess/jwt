@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Lcobucci\JWT\Token;
@@ -146,10 +147,10 @@ final class ParserTest extends TestCase
                       ->willReturn([RegisteredClaims::AUDIENCE => 'test']);
 
         $parser = $this->createParser();
-        $token  = $parser->parse('a.b.');
+        $token = $parser->parse('a.b.');
 
         $headers = new DataSet(['typ' => 'JWT', 'alg' => 'none'], 'a');
-        $claims  = new DataSet([RegisteredClaims::AUDIENCE => ['test']], 'b');
+        $claims = new DataSet([RegisteredClaims::AUDIENCE => ['test']], 'b');
 
         self::assertAttributeEquals($headers, 'headers', $token);
         self::assertAttributeEquals($claims, 'claims', $token);
@@ -193,10 +194,10 @@ final class ParserTest extends TestCase
                       ->willReturn([RegisteredClaims::AUDIENCE => 'test']);
 
         $parser = $this->createParser();
-        $token  = $parser->parse('a.b.');
+        $token = $parser->parse('a.b.');
 
         $headers = new DataSet(['typ' => 'JWT', 'alg' => 'none', RegisteredClaims::AUDIENCE => 'test'], 'a');
-        $claims  = new DataSet([RegisteredClaims::AUDIENCE => ['test']], 'b');
+        $claims = new DataSet([RegisteredClaims::AUDIENCE => ['test']], 'b');
 
         self::assertAttributeEquals($headers, 'headers', $token);
         self::assertAttributeEquals($claims, 'claims', $token);
@@ -240,10 +241,10 @@ final class ParserTest extends TestCase
                       ->willReturn([RegisteredClaims::AUDIENCE => 'test']);
 
         $parser = $this->createParser();
-        $token  = $parser->parse('a.b.c');
+        $token = $parser->parse('a.b.c');
 
         $headers = new DataSet(['typ' => 'JWT'], 'a');
-        $claims  = new DataSet([RegisteredClaims::AUDIENCE => ['test']], 'b');
+        $claims = new DataSet([RegisteredClaims::AUDIENCE => ['test']], 'b');
 
         self::assertAttributeEquals($headers, 'headers', $token);
         self::assertAttributeEquals($claims, 'claims', $token);
@@ -287,10 +288,10 @@ final class ParserTest extends TestCase
                       ->willReturn([RegisteredClaims::AUDIENCE => 'test']);
 
         $parser = $this->createParser();
-        $token  = $parser->parse('a.b.c');
+        $token = $parser->parse('a.b.c');
 
         $headers = new DataSet(['typ' => 'JWT', 'alg' => 'none'], 'a');
-        $claims  = new DataSet([RegisteredClaims::AUDIENCE => ['test']], 'b');
+        $claims = new DataSet([RegisteredClaims::AUDIENCE => ['test']], 'b');
 
         self::assertAttributeEquals($headers, 'headers', $token);
         self::assertAttributeEquals($claims, 'claims', $token);
@@ -339,10 +340,10 @@ final class ParserTest extends TestCase
                       ->willReturn('c_dec');
 
         $parser = $this->createParser();
-        $token  = $parser->parse('a.b.c');
+        $token = $parser->parse('a.b.c');
 
-        $headers   = new DataSet(['typ' => 'JWT', 'alg' => 'HS256'], 'a');
-        $claims    = new DataSet([RegisteredClaims::AUDIENCE => ['test']], 'b');
+        $headers = new DataSet(['typ' => 'JWT', 'alg' => 'HS256'], 'a');
+        $claims = new DataSet([RegisteredClaims::AUDIENCE => ['test']], 'b');
         $signature = new Signature('c_dec', 'c');
 
         self::assertAttributeEquals($headers, 'headers', $token);
@@ -368,8 +369,8 @@ final class ParserTest extends TestCase
     public function parseMustConvertDateClaimsToObjects(): void
     {
         $data = [
-            RegisteredClaims::ISSUED_AT => 1486930663,
-            RegisteredClaims::NOT_BEFORE => 1486930663,
+            RegisteredClaims::ISSUED_AT       => 1486930663,
+            RegisteredClaims::NOT_BEFORE      => 1486930663,
             RegisteredClaims::EXPIRATION_TIME => '1486930757.023055',
         ];
 
@@ -394,7 +395,7 @@ final class ParserTest extends TestCase
                       ->willReturn($data);
 
         /** @var Plain $token */
-        $token  = $this->createParser()->parse('a.b.');
+        $token = $this->createParser()->parse('a.b.');
         $claims = $token->claims();
 
         self::assertEquals(

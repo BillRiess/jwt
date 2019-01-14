@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Lcobucci\JWT\FunctionalTests;
@@ -46,10 +47,10 @@ class UnsignedTokenTest extends TestCase
      */
     public function builderCanGenerateAToken(): Token
     {
-        $user    = ['name' => 'testing', 'email' => 'testing@abc.com'];
+        $user = ['name' => 'testing', 'email' => 'testing@abc.com'];
         $builder = $this->config->createBuilder();
 
-        $expiration = new DateTimeImmutable('@' . (self::CURRENT_TIME + 3000));
+        $expiration = new DateTimeImmutable('@'.(self::CURRENT_TIME + 3000));
 
         $token = $builder->identifiedBy('1')
                          ->permittedFor('http://client.abc.com')
@@ -109,7 +110,7 @@ class UnsignedTokenTest extends TestCase
      */
     public function tokenValidationShouldPassWhenEverythingIsFine(Token $generated): void
     {
-        $clock = new FrozenClock(new DateTimeImmutable('@' . self::CURRENT_TIME));
+        $clock = new FrozenClock(new DateTimeImmutable('@'.self::CURRENT_TIME));
 
         $constraints = [
             new IdentifiedBy('1'),
@@ -172,21 +173,20 @@ class UnsignedTokenTest extends TestCase
 
     private function validUserConstraint(): Constraint
     {
-        return new class() implements Constraint
-        {
+        return new class() implements Constraint {
             public function assert(Token $token): void
             {
-                if (! $token instanceof Token\Plain) {
+                if (!$token instanceof Token\Plain) {
                     throw new ConstraintViolation();
                 }
 
                 $claims = $token->claims();
 
-                if (! $claims->has('user')) {
+                if (!$claims->has('user')) {
                     throw new ConstraintViolation();
                 }
 
-                $name  = $claims->get('user')['name'] ?? '';
+                $name = $claims->get('user')['name'] ?? '';
                 $email = $claims->get('user')['email'] ?? '';
 
                 if ($name === '' || $email === '') {

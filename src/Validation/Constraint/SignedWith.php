@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Lcobucci\JWT\Validation\Constraint;
@@ -23,7 +24,7 @@ final class SignedWith implements Constraint
     public function __construct(Signer $signer, Signer\Key $key)
     {
         $this->signer = $signer;
-        $this->key    = $key;
+        $this->key = $key;
     }
 
     /**
@@ -31,7 +32,7 @@ final class SignedWith implements Constraint
      */
     public function assert(Token $token): void
     {
-        if (! $token instanceof Token\Plain) {
+        if (!$token instanceof Token\Plain) {
             throw new ConstraintViolation('You should pass a plain token');
         }
 
@@ -39,7 +40,7 @@ final class SignedWith implements Constraint
             throw new ConstraintViolation('Token signer mismatch');
         }
 
-        if (! $this->signer->verify($token->signature()->hash(), $token->payload(), $this->key)) {
+        if (!$this->signer->verify($token->signature()->hash(), $token->payload(), $this->key)) {
             throw new ConstraintViolation('Token signature mismatch');
         }
     }

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Lcobucci\JWT\Token;
@@ -22,7 +23,7 @@ final class DataSet
      */
     public function __construct(array $data, string $encoded)
     {
-        $this->data    = $data;
+        $this->data = $data;
         $this->encoded = $encoded;
     }
 

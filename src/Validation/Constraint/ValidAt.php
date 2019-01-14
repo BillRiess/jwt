@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Lcobucci\JWT\Validation\Constraint;
@@ -25,7 +26,7 @@ final class ValidAt implements Constraint
 
     public function __construct(Clock $clock, ?DateInterval $leeway = null)
     {
-        $this->clock  = $clock;
+        $this->clock = $clock;
         $this->leeway = $this->guardLeeway($leeway);
     }
 
@@ -69,7 +70,7 @@ final class ValidAt implements Constraint
      */
     private function assertMinimumTime(Token $token, DateTimeInterface $now): void
     {
-        if (! $token->isMinimumTimeBefore($now)) {
+        if (!$token->isMinimumTimeBefore($now)) {
             throw new ConstraintViolation('The token cannot be used yet');
         }
     }
@@ -79,7 +80,7 @@ final class ValidAt implements Constraint
      */
     private function assertIssueTime(Token $token, DateTimeInterface $now): void
     {
-        if (! $token->hasBeenIssuedBefore($now)) {
+        if (!$token->hasBeenIssuedBefore($now)) {
             throw new ConstraintViolation('The token was issued in the future');
         }
     }

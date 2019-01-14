@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Lcobucci\JWT\Validation\Constraint;
@@ -58,7 +59,7 @@ final class RelatedToTest extends ConstraintTestCase
      */
     public function assertShouldNotRaiseExceptionWhenSubjectMatches(): void
     {
-        $token      = $this->buildToken([RegisteredClaims::SUBJECT => 'user-auth']);
+        $token = $this->buildToken([RegisteredClaims::SUBJECT => 'user-auth']);
         $constraint = new RelatedTo('user-auth');
 
         $constraint->assert($token);

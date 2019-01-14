@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Lcobucci\JWT\Signer\Ecdsa;
@@ -19,7 +20,7 @@ use function mb_substr;
 use function str_pad;
 
 /**
- * Manipulates the digital signature using ASN.1
+ * Manipulates the digital signature using ASN.1.
  *
  * @see https://en.wikipedia.org/wiki/Abstract_Syntax_Notation_One
  */
@@ -69,7 +70,7 @@ final class Asn1 implements PointsManipulator
         $hex = gmp_strval(gmp_strval($value), 16);
 
         if (mb_strlen($hex, '8bit') % 2 !== 0) {
-            $hex = '0' . $hex;
+            $hex = '0'.$hex;
         }
 
         return $hex;

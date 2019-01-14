@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Lcobucci\JWT\Signer;
@@ -27,9 +28,9 @@ abstract class OpenSSL implements Signer
         try {
             $signature = '';
 
-            if (! openssl_sign($payload, $signature, $key, $this->getAlgorithm())) {
+            if (!openssl_sign($payload, $signature, $key, $this->getAlgorithm())) {
                 throw new InvalidArgumentException(
-                    'There was an error while creating the signature: ' . openssl_error_string()
+                    'There was an error while creating the signature: '.openssl_error_string()
                 );
             }
 
@@ -56,7 +57,7 @@ abstract class OpenSSL implements Signer
         string $payload,
         string $pem
     ): bool {
-        $key    = $this->getPublicKey($pem);
+        $key = $this->getPublicKey($pem);
         $result = openssl_verify($payload, $expected, $key, $this->getAlgorithm());
         openssl_free_key($key);
 
@@ -76,7 +77,7 @@ abstract class OpenSSL implements Signer
     }
 
     /**
-     * Raises an exception when the key type is not the expected type
+     * Raises an exception when the key type is not the expected type.
      *
      * @param resource|bool $key
      *
@@ -84,28 +85,28 @@ abstract class OpenSSL implements Signer
      */
     private function validateKey($key): void
     {
-        if (! is_resource($key)) {
+        if (!is_resource($key)) {
             throw new InvalidArgumentException(
-                'It was not possible to parse your key, reason: ' . openssl_error_string()
+                'It was not possible to parse your key, reason: '.openssl_error_string()
             );
         }
 
         $details = openssl_pkey_get_details($key);
 
-        if (! isset($details['key']) || $details['type'] !== $this->getKeyType()) {
+        if (!isset($details['key']) || $details['type'] !== $this->getKeyType()) {
             throw new InvalidArgumentException('This key is not compatible with this signer');
         }
     }
 
     /**
-     * Returns the type of key to be used to create/verify the signature (using OpenSSL constants)
+     * Returns the type of key to be used to create/verify the signature (using OpenSSL constants).
      *
      * @internal
      */
     abstract public function getKeyType(): int;
 
     /**
-     * Returns which algorithm to be used to create/verify the signature (using OpenSSL constants)
+     * Returns which algorithm to be used to create/verify the signature (using OpenSSL constants).
      *
      * @internal
      */

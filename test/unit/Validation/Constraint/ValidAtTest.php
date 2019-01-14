@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Lcobucci\JWT\Validation\Constraint;
@@ -34,7 +35,7 @@ final class ValidAtTest extends ConstraintTestCase
      */
     public function constructShouldRaiseExceptionOnNegativeLeeway(): void
     {
-        $leeway         = new DateInterval('PT30S');
+        $leeway = new DateInterval('PT30S');
         $leeway->invert = 1;
 
         $this->expectException(InvalidArgumentException::class);
@@ -62,8 +63,8 @@ final class ValidAtTest extends ConstraintTestCase
         $now = $this->clock->now();
 
         $claims = [
-            RegisteredClaims::ISSUED_AT => $now->modify('-20 seconds'),
-            RegisteredClaims::NOT_BEFORE => $now->modify('-10 seconds'),
+            RegisteredClaims::ISSUED_AT       => $now->modify('-20 seconds'),
+            RegisteredClaims::NOT_BEFORE      => $now->modify('-10 seconds'),
             RegisteredClaims::EXPIRATION_TIME => $now->modify('-10 seconds'),
         ];
 
@@ -92,8 +93,8 @@ final class ValidAtTest extends ConstraintTestCase
         $now = $this->clock->now();
 
         $claims = [
-            RegisteredClaims::ISSUED_AT => $now->modify('-20 seconds'),
-            RegisteredClaims::NOT_BEFORE => $now->modify('+40 seconds'),
+            RegisteredClaims::ISSUED_AT       => $now->modify('-20 seconds'),
+            RegisteredClaims::NOT_BEFORE      => $now->modify('+40 seconds'),
             RegisteredClaims::EXPIRATION_TIME => $now->modify('+60 seconds'),
         ];
 
@@ -121,8 +122,8 @@ final class ValidAtTest extends ConstraintTestCase
         $now = $this->clock->now();
 
         $claims = [
-            RegisteredClaims::ISSUED_AT => $now->modify('+20 seconds'),
-            RegisteredClaims::NOT_BEFORE => $now->modify('+40 seconds'),
+            RegisteredClaims::ISSUED_AT       => $now->modify('+20 seconds'),
+            RegisteredClaims::NOT_BEFORE      => $now->modify('+40 seconds'),
             RegisteredClaims::EXPIRATION_TIME => $now->modify('+60 seconds'),
         ];
 
@@ -152,8 +153,8 @@ final class ValidAtTest extends ConstraintTestCase
         $now = $this->clock->now();
 
         $claims = [
-            RegisteredClaims::ISSUED_AT => $now->modify('+5 seconds'),
-            RegisteredClaims::NOT_BEFORE => $now->modify('+5 seconds'),
+            RegisteredClaims::ISSUED_AT       => $now->modify('+5 seconds'),
+            RegisteredClaims::NOT_BEFORE      => $now->modify('+5 seconds'),
             RegisteredClaims::EXPIRATION_TIME => $now->modify('-5 seconds'),
         ];
 
@@ -180,12 +181,12 @@ final class ValidAtTest extends ConstraintTestCase
     public function assertShouldNotRaiseExceptionWhenTokenIsUsedInTheRightMoment(): void
     {
         $constraint = new ValidAt($this->clock);
-        $now        = $this->clock->now();
+        $now = $this->clock->now();
 
         $token = $this->buildToken(
             [
-                RegisteredClaims::ISSUED_AT => $now->modify('-40 seconds'),
-                RegisteredClaims::NOT_BEFORE => $now->modify('-20 seconds'),
+                RegisteredClaims::ISSUED_AT       => $now->modify('-40 seconds'),
+                RegisteredClaims::NOT_BEFORE      => $now->modify('-20 seconds'),
                 RegisteredClaims::EXPIRATION_TIME => $now->modify('+60 seconds'),
             ]
         );
@@ -195,8 +196,8 @@ final class ValidAtTest extends ConstraintTestCase
 
         $token = $this->buildToken(
             [
-                RegisteredClaims::ISSUED_AT => $now,
-                RegisteredClaims::NOT_BEFORE => $now,
+                RegisteredClaims::ISSUED_AT       => $now,
+                RegisteredClaims::NOT_BEFORE      => $now,
                 RegisteredClaims::EXPIRATION_TIME => $now->modify('+60 seconds'),
             ]
         );
@@ -221,7 +222,7 @@ final class ValidAtTest extends ConstraintTestCase
      */
     public function assertShouldNotRaiseExceptionWhenTokenDoesNotHaveTimeClaims(): void
     {
-        $token      = $this->buildToken();
+        $token = $this->buildToken();
         $constraint = new ValidAt($this->clock);
 
         $constraint->assert($token);

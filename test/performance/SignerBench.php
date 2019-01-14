@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Lcobucci\JWT;
@@ -16,8 +17,8 @@ use PhpBench\Benchmark\Metadata\Annotations\Revs;
 abstract class SignerBench
 {
     private const PAYLOAD = "It\xe2\x80\x99s a dangerous business, Frodo, going out your door. You step onto the road,"
-                          . " and if you don't keep your feet, there\xe2\x80\x99s no knowing where you might be swept"
-                          . ' off to.';
+                          ." and if you don't keep your feet, there\xe2\x80\x99s no knowing where you might be swept"
+                          .' off to.';
 
     /**
      * @var Signer
@@ -41,10 +42,10 @@ abstract class SignerBench
 
     final public function init(): void
     {
-        $this->signer          = $this->signer();
-        $this->signingKey      = $this->signingKey();
+        $this->signer = $this->signer();
+        $this->signingKey = $this->signingKey();
         $this->verificationKey = $this->verificationKey();
-        $this->signature       = $this->signer->sign(self::PAYLOAD, $this->signingKey);
+        $this->signature = $this->signer->sign(self::PAYLOAD, $this->signingKey);
     }
 
     final public function benchSignature(): void

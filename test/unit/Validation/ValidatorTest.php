@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Lcobucci\JWT\Validation;
@@ -32,7 +33,7 @@ final class ValidatorTest extends TestCase
      */
     public function assertShouldRaiseExceptionWhenAtLeastOneConstraintFails(): void
     {
-        $failedConstraint     = $this->createMock(Constraint::class);
+        $failedConstraint = $this->createMock(Constraint::class);
         $successfulConstraint = $this->createMock(Constraint::class);
 
         $failedConstraint->expects(self::once())
@@ -78,7 +79,7 @@ final class ValidatorTest extends TestCase
      */
     public function validateShouldReturnFalseWhenAtLeastOneConstraintFails(): void
     {
-        $failedConstraint     = $this->createMock(Constraint::class);
+        $failedConstraint = $this->createMock(Constraint::class);
         $successfulConstraint = $this->createMock(Constraint::class);
 
         $failedConstraint->expects(self::once())

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Lcobucci\JWT\Signer;
@@ -30,7 +31,7 @@ final class RsaTest extends TestCase
     {
         $payload = 'testing';
 
-        $signer    = $this->getSigner();
+        $signer = $this->getSigner();
         $signature = $signer->sign($payload, self::$rsaKeys['private']);
 
         $publicKey = openssl_pkey_get_public(self::$rsaKeys['public']->getContent());
@@ -50,7 +51,7 @@ final class RsaTest extends TestCase
      */
     public function signShouldRaiseAnExceptionWhenKeyIsInvalid(): void
     {
-        $key = <<<KEY
+        $key = <<<'KEY'
 -----BEGIN RSA PRIVATE KEY-----
 MGECAQACEQC4MRKSVsq5XnRBrJoX6+rnAgMBAAECECO8SZkgw6Yg66A6SUly/3kC
 CQDtPXZtCQWJuwIJAMbBu17GDOrFAggopfhNlFcjkwIIVjb7G+U0/TECCEERyvxP
@@ -117,7 +118,7 @@ KEY;
      */
     public function verifyShouldReturnTrueWhenSignatureIsValid(): void
     {
-        $payload    = 'testing';
+        $payload = 'testing';
         $privateKey = openssl_pkey_get_private(self::$rsaKeys['private']->getContent());
         self::assertInternalType('resource', $privateKey);
 

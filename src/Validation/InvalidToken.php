@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Lcobucci\JWT\Validation;
@@ -16,7 +17,7 @@ final class InvalidToken extends Exception
 
     public static function fromViolations(ConstraintViolation ...$violations): self
     {
-        $exception             = new self(self::buildMessage($violations));
+        $exception = new self(self::buildMessage($violations));
         $exception->violations = $violations;
 
         return $exception;
@@ -29,12 +30,12 @@ final class InvalidToken extends Exception
     {
         $violations = array_map(
             static function (ConstraintViolation $violation): string {
-                return '- ' . $violation->getMessage();
+                return '- '.$violation->getMessage();
             },
             $violations
         );
 
-        $message  = "The token violates some mandatory constraints, details:\n";
+        $message = "The token violates some mandatory constraints, details:\n";
         $message .= implode("\n", $violations);
 
         return $message;

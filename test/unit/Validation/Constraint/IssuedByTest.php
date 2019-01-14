@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Lcobucci\JWT\Validation\Constraint;
@@ -77,7 +78,7 @@ final class IssuedByTest extends ConstraintTestCase
      */
     public function assertShouldNotRaiseExceptionWhenIssuerMatches(): void
     {
-        $token      = $this->buildToken([RegisteredClaims::ISSUER => 'test.com']);
+        $token = $this->buildToken([RegisteredClaims::ISSUER => 'test.com']);
         $constraint = new IssuedBy('test.com', 'test.net');
 
         $constraint->assert($token);

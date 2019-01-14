@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Lcobucci\JWT\FunctionalTests;
@@ -109,7 +110,7 @@ class EcdsaTokenTest extends TestCase
      */
     public function builderCanGenerateAToken(): Token
     {
-        $user    = ['name' => 'testing', 'email' => 'testing@abc.com'];
+        $user = ['name' => 'testing', 'email' => 'testing@abc.com'];
         $builder = $this->config->createBuilder();
 
         $token = $builder->identifiedBy('1')
@@ -300,7 +301,7 @@ class EcdsaTokenTest extends TestCase
     public function everythingShouldWorkWithAKeyWithParams(): void
     {
         $builder = $this->config->createBuilder();
-        $signer  = $this->config->getSigner();
+        $signer = $this->config->getSigner();
 
         $token = $builder->identifiedBy('1')
                          ->permittedFor('http://client.abc.com')
@@ -337,19 +338,19 @@ class EcdsaTokenTest extends TestCase
     public function everythingShouldWorkWhenUsingATokenGeneratedByOtherLibs(): void
     {
         $data = 'eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCJ9.eyJoZWxsbyI6IndvcmxkIn0.'
-                . 'AQx1MqdTni6KuzfOoedg2-7NUiwe-b88SWbdmviz40GTwrM0Mybp1i1tVtm'
-                . 'TSQ91oEXGXBdtwsN6yalzP9J-sp2YATX_Tv4h-BednbdSvYxZsYnUoZ--ZU'
-                . 'dL10t7g8Yt3y9hdY_diOjIptcha6ajX8yzkDGYG42iSe3f5LywSuD6FO5c';
+                .'AQx1MqdTni6KuzfOoedg2-7NUiwe-b88SWbdmviz40GTwrM0Mybp1i1tVtm'
+                .'TSQ91oEXGXBdtwsN6yalzP9J-sp2YATX_Tv4h-BednbdSvYxZsYnUoZ--ZU'
+                .'dL10t7g8Yt3y9hdY_diOjIptcha6ajX8yzkDGYG42iSe3f5LywSuD6FO5c';
 
-        $key = '-----BEGIN PUBLIC KEY-----' . PHP_EOL
-               . 'MIGbMBAGByqGSM49AgEGBSuBBAAjA4GGAAQAcpkss6wI7PPlxj3t7A1RqMH3nvL4' . PHP_EOL
-               . 'L5Tzxze/XeeYZnHqxiX+gle70DlGRMqqOq+PJ6RYX7vK0PJFdiAIXlyPQq0B3KaU' . PHP_EOL
-               . 'e86IvFeQSFrJdCc0K8NfiH2G1loIk3fiR+YLqlXk6FAeKtpXJKxR1pCQCAM+vBCs' . PHP_EOL
-               . 'mZudf1zCUZ8/4eodlHU=' . PHP_EOL
-               . '-----END PUBLIC KEY-----';
+        $key = '-----BEGIN PUBLIC KEY-----'.PHP_EOL
+               .'MIGbMBAGByqGSM49AgEGBSuBBAAjA4GGAAQAcpkss6wI7PPlxj3t7A1RqMH3nvL4'.PHP_EOL
+               .'L5Tzxze/XeeYZnHqxiX+gle70DlGRMqqOq+PJ6RYX7vK0PJFdiAIXlyPQq0B3KaU'.PHP_EOL
+               .'e86IvFeQSFrJdCc0K8NfiH2G1loIk3fiR+YLqlXk6FAeKtpXJKxR1pCQCAM+vBCs'.PHP_EOL
+               .'mZudf1zCUZ8/4eodlHU='.PHP_EOL
+               .'-----END PUBLIC KEY-----';
 
         /** @var Token\Plain $token */
-        $token      = $this->config->getParser()->parse($data);
+        $token = $this->config->getParser()->parse($data);
         $constraint = new SignedWith(Sha512::create(), new Key($key));
 
         self::assertTrue($this->config->getValidator()->validate($token, $constraint));

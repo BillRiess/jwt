@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Lcobucci\JWT\Token;
@@ -30,8 +31,8 @@ final class Plain implements TokenInterface
         DataSet $claims,
         Signature $signature
     ) {
-        $this->headers   = $headers;
-        $this->claims    = $claims;
+        $this->headers = $headers;
+        $this->claims = $claims;
         $this->signature = $signature;
     }
 
@@ -64,7 +65,7 @@ final class Plain implements TokenInterface
      */
     public function payload(): string
     {
-        return $this->headers . '.' . $this->claims;
+        return $this->headers.'.'.$this->claims;
     }
 
     /**
@@ -120,7 +121,7 @@ final class Plain implements TokenInterface
      */
     public function isExpired(DateTimeInterface $now): bool
     {
-        if (! $this->claims->has(RegisteredClaims::EXPIRATION_TIME)) {
+        if (!$this->claims->has(RegisteredClaims::EXPIRATION_TIME)) {
             return false;
         }
 

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Lcobucci\JWT;
@@ -9,7 +10,7 @@ use Lcobucci\JWT\Signer\None;
 use Lcobucci\JWT\Validation\Constraint;
 
 /**
- * Configuration container for the JWT Builder and Parser
+ * Configuration container for the JWT Builder and Parser.
  *
  * Serves like a small DI container to simplify the creation and usage
  * of the objects.
@@ -81,8 +82,8 @@ final class Configuration
         Key $signingKey,
         Key $verificationKey
     ) {
-        $this->signer          = $signer;
-        $this->signingKey      = $signingKey;
+        $this->signer = $signer;
+        $this->signingKey = $signingKey;
         $this->verificationKey = $verificationKey;
     }
 

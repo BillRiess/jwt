@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Lcobucci\JWT\Token;
@@ -22,7 +23,7 @@ final class Signature
 
     public function __construct(string $hash, string $encoded)
     {
-        $this->hash    = $hash;
+        $this->hash = $hash;
         $this->encoded = $encoded;
     }
 
@@ -32,7 +33,7 @@ final class Signature
     }
 
     /**
-     * Returns the encoded version of the signature
+     * Returns the encoded version of the signature.
      */
     public function __toString(): string
     {

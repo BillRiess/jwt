@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Lcobucci\JWT\Rsa;
@@ -14,11 +15,11 @@ abstract class RsaBench extends SignerBench
 {
     protected function signingKey(): Key
     {
-        return new Key('file://' . __DIR__ . '/private.key');
+        return new Key('file://'.__DIR__.'/private.key');
     }
 
     protected function verificationKey(): Key
     {
-        return new Key('file://' . __DIR__ . '/public.key');
+        return new Key('file://'.__DIR__.'/public.key');
     }
 }

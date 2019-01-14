@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Lcobucci\JWT\Signer;
@@ -19,7 +20,7 @@ abstract class Ecdsa extends OpenSSL
         $this->manipulator = $manipulator;
     }
 
-    public static function create(): Ecdsa
+    public static function create(): self
     {
         return new static(new Asn1());
     }
@@ -56,7 +57,7 @@ abstract class Ecdsa extends OpenSSL
     }
 
     /**
-     * Returns the length of each point in the signature, so that we can calculate and verify R and S points properly
+     * Returns the length of each point in the signature, so that we can calculate and verify R and S points properly.
      *
      * @internal
      */

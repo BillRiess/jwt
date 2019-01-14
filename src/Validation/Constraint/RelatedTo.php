@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Lcobucci\JWT\Validation\Constraint;
@@ -24,7 +25,7 @@ final class RelatedTo implements Constraint
      */
     public function assert(Token $token): void
     {
-        if (! $token->isRelatedTo($this->subject)) {
+        if (!$token->isRelatedTo($this->subject)) {
             throw new ConstraintViolation(
                 'The token is not related to the expected subject'
             );

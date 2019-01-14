@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Lcobucci\JWT\Signer;
@@ -47,7 +48,7 @@ final class Key
     private function readFile(string $content): string
     {
         try {
-            $file    = new SplFileObject(substr($content, 7));
+            $file = new SplFileObject(substr($content, 7));
             $content = $file->fread($file->getSize());
             assert(is_string($content));
 

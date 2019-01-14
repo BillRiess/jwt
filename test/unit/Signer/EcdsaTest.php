@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Lcobucci\JWT\Signer;
@@ -60,7 +61,7 @@ final class EcdsaTest extends TestCase
     {
         $payload = 'testing';
 
-        $signer    = $this->getSigner();
+        $signer = $this->getSigner();
         $signature = $signer->sign($payload, self::$ecdsaKeys['private']);
 
         $publicKey = openssl_pkey_get_public(self::$ecdsaKeys['public1']->getContent());
@@ -90,7 +91,7 @@ final class EcdsaTest extends TestCase
      */
     public function verifyShouldDelegateToEcdsaSignerUsingPublicKey(): void
     {
-        $payload    = 'testing';
+        $payload = 'testing';
         $privateKey = openssl_pkey_get_private(self::$ecdsaKeys['private']->getContent());
 
         self::assertInternalType('resource', $privateKey);

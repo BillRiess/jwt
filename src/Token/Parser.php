@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Lcobucci\JWT\Token;
@@ -43,11 +44,11 @@ final class Parser implements ParserInterface
     }
 
     /**
-     * Splits the JWT string into an array
-     *
-     * @return string[]
+     * Splits the JWT string into an array.
      *
      * @throws InvalidArgumentException When JWT doesn't have all parts.
+     *
+     * @return string[]
      */
     private function splitJwt(string $jwt): array
     {
@@ -61,11 +62,11 @@ final class Parser implements ParserInterface
     }
 
     /**
-     * Parses the header from a string
-     *
-     * @return mixed[]
+     * Parses the header from a string.
      *
      * @throws InvalidArgumentException When an invalid header is informed.
+     *
+     * @return mixed[]
      */
     private function parseHeader(string $data): array
     {
@@ -79,7 +80,7 @@ final class Parser implements ParserInterface
     }
 
     /**
-     * Parses the claim set from a string
+     * Parses the claim set from a string.
      *
      * @return mixed[]
      */
@@ -101,26 +102,26 @@ final class Parser implements ParserInterface
     private function convertDate(string $value): DateTimeImmutable
     {
         if (strpos($value, '.') === false) {
-            return new DateTimeImmutable('@' . $value);
+            return new DateTimeImmutable('@'.$value);
         }
 
         $date = DateTimeImmutable::createFromFormat('U.u', $value);
 
         if ($date === false) {
-            throw new InvalidArgumentException('Given value is not in the allowed format: ' . $value);
+            throw new InvalidArgumentException('Given value is not in the allowed format: '.$value);
         }
 
         return $date;
     }
 
     /**
-     * Returns the signature from given data
+     * Returns the signature from given data.
      *
      * @param mixed[] $header
      */
     private function parseSignature(array $header, string $data): Signature
     {
-        if ($data === '' || ! isset($header['alg']) || $header['alg'] === 'none') {
+        if ($data === '' || !isset($header['alg']) || $header['alg'] === 'none') {
             return Signature::fromEmptyData();
         }
 

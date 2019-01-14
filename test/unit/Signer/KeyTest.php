@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Lcobucci\JWT\Signer;
@@ -44,7 +45,7 @@ final class KeyTest extends TestCase
      */
     public function constructShouldBeAbleToConfigureContentFromFile(): void
     {
-        $key = new Key('file://' . vfsStream::url('root/test.pem'));
+        $key = new Key('file://'.vfsStream::url('root/test.pem'));
 
         self::assertAttributeEquals('testing', 'content', $key);
         self::assertAttributeEquals(null, 'passphrase', $key);
@@ -62,7 +63,7 @@ final class KeyTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('You must inform a valid key file');
 
-        new Key('file://' . vfsStream::url('root/test2.pem'));
+        new Key('file://'.vfsStream::url('root/test2.pem'));
     }
 
     /**

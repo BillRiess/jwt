@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Lcobucci\JWT;
@@ -22,13 +23,13 @@ trait Keys
      */
     public static function createRsaKeys(): void
     {
-        $dir = 'file://' . __DIR__;
+        $dir = 'file://'.__DIR__;
 
         static::$rsaKeys = [
-            'private'           => new Key($dir . '/rsa/private.key'),
-            'public'            => new Key($dir . '/rsa/public.key'),
-            'encrypted-private' => new Key($dir . '/rsa/encrypted-private.key', 'testing'),
-            'encrypted-public'  => new Key($dir . '/rsa/encrypted-public.key'),
+            'private'           => new Key($dir.'/rsa/private.key'),
+            'public'            => new Key($dir.'/rsa/public.key'),
+            'encrypted-private' => new Key($dir.'/rsa/encrypted-private.key', 'testing'),
+            'encrypted-public'  => new Key($dir.'/rsa/encrypted-public.key'),
         ];
     }
 
@@ -37,14 +38,14 @@ trait Keys
      */
     public static function createEcdsaKeys(): void
     {
-        $dir = 'file://' . __DIR__;
+        $dir = 'file://'.__DIR__;
 
         static::$ecdsaKeys = [
-            'private'        => new Key($dir . '/ecdsa/private.key'),
-            'private-params' => new Key($dir . '/ecdsa/private2.key'),
-            'public1'        => new Key($dir . '/ecdsa/public1.key'),
-            'public2'        => new Key($dir . '/ecdsa/public2.key'),
-            'public-params'  => new Key($dir . '/ecdsa/public3.key'),
+            'private'        => new Key($dir.'/ecdsa/private.key'),
+            'private-params' => new Key($dir.'/ecdsa/private2.key'),
+            'public1'        => new Key($dir.'/ecdsa/public1.key'),
+            'public2'        => new Key($dir.'/ecdsa/public2.key'),
+            'public-params'  => new Key($dir.'/ecdsa/public3.key'),
         ];
     }
 }

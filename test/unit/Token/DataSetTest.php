@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Lcobucci\JWT\Token;
@@ -87,7 +88,7 @@ final class DataSetTest extends TestCase
     public function allShouldReturnAllConfiguredItems(): void
     {
         $items = ['one' => 1, 'two' => 2];
-        $set   = new DataSet($items, 'one=1');
+        $set = new DataSet($items, 'one=1');
 
         self::assertEquals($items, $set->all());
     }

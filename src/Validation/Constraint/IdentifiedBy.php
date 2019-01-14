@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Lcobucci\JWT\Validation\Constraint;
@@ -24,7 +25,7 @@ final class IdentifiedBy implements Constraint
      */
     public function assert(Token $token): void
     {
-        if (! $token->isIdentifiedBy($this->id)) {
+        if (!$token->isIdentifiedBy($this->id)) {
             throw new ConstraintViolation(
                 'The token is not identified with the expected ID'
             );

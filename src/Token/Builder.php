@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Lcobucci\JWT\Token;
@@ -42,7 +43,7 @@ final class Builder implements BuilderInterface
     {
         $audiences = $this->claims[RegisteredClaims::AUDIENCE] ?? [];
 
-        if (! in_array($audience, $audiences, true)) {
+        if (!in_array($audience, $audiences, true)) {
             $audiences[] = $audience;
         }
 
@@ -144,13 +145,13 @@ final class Builder implements BuilderInterface
      */
     public function getToken(Signer $signer, Key $key): Plain
     {
-        $headers        = $this->headers;
+        $headers = $this->headers;
         $headers['alg'] = $signer->getAlgorithmId();
 
         $encodedHeaders = $this->encode($headers);
-        $encodedClaims  = $this->encode($this->formatClaims($this->claims));
+        $encodedClaims = $this->encode($this->formatClaims($this->claims));
 
-        $signature        = $signer->sign($encodedHeaders . '.' . $encodedClaims, $key);
+        $signature = $signer->sign($encodedHeaders.'.'.$encodedClaims, $key);
         $encodedSignature = $this->encoder->base64UrlEncode($signature);
 
         return new Plain(
@@ -167,7 +168,7 @@ final class Builder implements BuilderInterface
      */
     private function formatClaims(array $claims): array
     {
-        if (isset($claims[RegisteredClaims::AUDIENCE][0]) && ! isset($claims[RegisteredClaims::AUDIENCE][1])) {
+        if (isset($claims[RegisteredClaims::AUDIENCE][0]) && !isset($claims[RegisteredClaims::AUDIENCE][1])) {
             $claims[RegisteredClaims::AUDIENCE] = $claims[RegisteredClaims::AUDIENCE][0];
         }
 
@@ -183,13 +184,13 @@ final class Builder implements BuilderInterface
      */
     private function convertDate(DateTimeImmutable $date)
     {
-        $seconds      = $date->format('U');
+        $seconds = $date->format('U');
         $microseconds = $date->format('u');
 
         if ((int) $microseconds === 0) {
             return (int) $seconds;
         }
 
-        return $seconds . '.' . $microseconds;
+        return $seconds.'.'.$microseconds;
     }
 }
